@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ブルアカファンサイト キヴォトスポータル | ブルーアーカイブ 非公式ファンポータル</title>
+  <title>キヴォトスポータル | ブルーアーカイブ 非公式ファンサイト</title>
   <style>
     :root {
       --content-width: min(1200px, calc(100vw - 32px));
-      --text: #2f3f54;
-      --muted: #718099;
-      --accent: #1f3b62;
+      --text:   #1e3a5f;
+      --muted:  #5a7a9a;
+      --accent: #0e2040;
+      --sky:    #3b9bd8;
       --orange: #F39801;
     }
     * { box-sizing: border-box; }
@@ -22,103 +23,56 @@
       position: relative;
       display: flex;
       flex-direction: column;
-    }
-
-    /* ─── 背景 ─── */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background-image: url("assets/bg.jpg");
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: cover;
+      background: linear-gradient(155deg, #d6eaff 0%, #eaf5ff 45%, #d8edf7 100%);
       background-attachment: fixed;
-      filter: blur(4px) brightness(.82);
-      transform: scale(1.04);
-      transform-origin: center;
-      pointer-events: none;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background: radial-gradient(ellipse at center, rgba(24, 48, 78, .15) 0%, rgba(8, 18, 36, .52) 100%);
-      pointer-events: none;
     }
 
     /* ─── ヘッダー ─── */
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(20, 38, 64, .92);
-      border-bottom: 1px solid rgba(154, 188, 225, .35);
-      backdrop-filter: blur(8px);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,24,52,.93);
+      border-bottom: 1px solid rgba(80,150,220,.3);
+      backdrop-filter: blur(10px);
     }
     .header-inner {
-      max-width: var(--content-width);
-      margin: 0 auto;
-      padding: 0 16px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      max-width: var(--content-width); margin: 0 auto;
+      padding: 0 16px; height: 52px;
+      display: flex; align-items: center; gap: 20px;
     }
     .header-logo {
-      text-decoration: none;
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      flex-shrink: 0;
+      text-decoration: none; display: flex;
+      align-items: center; gap: 6px; flex-shrink: 0;
     }
-    .header-logo-jp {
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(207, 225, 245, .75);
-      letter-spacing: .1em;
+    .logo-mark {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: linear-gradient(135deg, #1a5fa8 0%, #3b9bd8 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 900; color: #fff; flex-shrink: 0;
     }
-    .header-logo-en {
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--orange);
-      letter-spacing: .04em;
+    .logo-text {
+      font-size: 17px; font-weight: 900;
+      color: #fff; letter-spacing: .05em;
     }
+    .logo-text span { color: var(--sky); }
     .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      flex: 1;
+      display: flex; align-items: center; gap: 2px; flex: 1;
     }
     .header-nav a {
-      padding: 5px 12px;
-      border-radius: 6px;
-      color: rgba(207, 225, 245, .85);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .04em;
+      padding: 5px 12px; border-radius: 6px;
+      color: rgba(210,235,255,.85); text-decoration: none;
+      font-size: 13px; font-weight: 600; letter-spacing: .04em;
       transition: background .12s, color .12s;
     }
-    .header-nav a:hover { background: rgba(255, 255, 255, .1); color: #fff; }
-    .header-nav a.active { background: rgba(243, 152, 1, .18); color: var(--orange); }
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: auto;
+    .header-nav a:hover { background: rgba(255,255,255,.08); color: #fff; }
+    .header-nav a.active {
+      background: rgba(59,155,216,.2); color: var(--sky);
+      border: 1px solid rgba(59,155,216,.35);
     }
+    .header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
     .header-sns a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 6px;
-      color: rgba(207, 225, 245, .7);
-      text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 6px;
+      color: rgba(210,235,255,.7); text-decoration: none;
       transition: color .12s, background .12s;
     }
     .header-sns a:hover { color: #fff; background: rgba(255,255,255,.1); }
@@ -142,7 +96,7 @@
       font-size: 11px;
       font-weight: 700;
       letter-spacing: .2em;
-      color: rgba(207, 225, 245, .7);
+      color: var(--muted);
       text-transform: uppercase;
       margin-bottom: 8px;
     }
@@ -150,15 +104,15 @@
       margin: 0;
       font-size: clamp(28px, 4vw, 48px);
       font-weight: 900;
-      color: var(--orange);
+      color: #1a4a8c;
       letter-spacing: .04em;
-      text-shadow: 0 4px 16px rgba(0,0,0,.5), 0 0 12px rgba(243,152,1,.25);
+      text-shadow: 0 2px 8px rgba(59,155,216,.2);
       line-height: 1.1;
     }
     .portal-hero-sub {
       margin: 6px 0 0;
       font-size: clamp(13px, 1.6vw, 17px);
-      color: rgba(228, 240, 252, .85);
+      color: var(--muted);
       font-weight: 600;
       letter-spacing: .08em;
     }
@@ -166,9 +120,9 @@
     /* ─── イベント速報バー ─── */
     .event-strip {
       border-radius: 12px;
-      background: rgba(20, 38, 64, .78);
-      border: 1px solid rgba(154, 188, 225, .3);
-      backdrop-filter: blur(3px);
+      background: rgba(255,255,255,.88);
+      border: 1px solid #c8daea;
+      box-shadow: 0 4px 16px rgba(10,20,48,.1);
       padding: 14px 18px;
       margin-bottom: 20px;
     }
@@ -182,7 +136,7 @@
       font-size: 11px;
       font-weight: 800;
       letter-spacing: .14em;
-      color: var(--orange);
+      color: #d97706;
       text-transform: uppercase;
     }
     .event-list {
@@ -204,26 +158,26 @@
       letter-spacing: .06em;
       white-space: nowrap;
     }
-    .event-tag-gacha  { background: rgba(243,152,1,.22); color: #F9B840; border: 1px solid rgba(243,152,1,.4); }
-    .event-tag-event  { background: rgba(94,160,224,.2); color: #7DC4F5; border: 1px solid rgba(94,160,224,.35); }
-    .event-tag-total  { background: rgba(200,80,80,.22); color: #F58080; border: 1px solid rgba(200,80,80,.4); }
+    .event-tag-gacha  { background: rgba(243,152,1,.15); color: #b45309; border: 1px solid rgba(243,152,1,.35); }
+    .event-tag-event  { background: rgba(37,99,235,.1);  color: #1d4ed8; border: 1px solid rgba(37,99,235,.3); }
+    .event-tag-total  { background: rgba(185,28,28,.1);  color: #b91c1c; border: 1px solid rgba(185,28,28,.3); }
     .event-name {
       font-size: 13px;
       font-weight: 600;
-      color: rgba(228, 240, 252, .92);
+      color: var(--text);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .event-period {
       font-size: 11px;
-      color: rgba(154, 188, 225, .75);
+      color: var(--muted);
       white-space: nowrap;
     }
     .event-bar-wrap {
       grid-column: 1 / -1;
       height: 4px;
-      background: rgba(255,255,255,.1);
+      background: rgba(0,0,0,.08);
       border-radius: 2px;
       overflow: hidden;
     }
@@ -518,10 +472,9 @@
       flex: 0 0 auto;
       padding: 14px 16px 18px;
       text-align: center;
-      color: rgba(207, 225, 245, .7);
+      color: var(--muted);
       font-size: 11px;
       letter-spacing: .06em;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
       border-top: 1px solid rgba(154, 188, 225, .15);
       background: rgba(8, 18, 36, .3);
     }
@@ -555,12 +508,12 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="header-logo" href="index.html">
-        <span class="header-logo-jp">ブルアカファンサイト</span>
-        <span class="header-logo-en">KIVOTOS PORTAL</span>
+        <div class="logo-mark">K</div>
+        <span class="logo-text">キヴォトス<span>ポータル</span></span>
       </a>
       <nav class="header-nav" aria-label="グローバルナビ">
         <a href="index.html" class="active">ホーム</a>
-        <a href="archive/index.html">生徒アーカイブ</a>
+        <a href="archive/index.html">生徒一覧</a>
         <a href="timeline/index.html">イベント年表</a>
       </nav>
       <div class="header-right">
@@ -584,8 +537,8 @@
       <!-- ── ポータルタイトル ── -->
       <div class="portal-hero">
         <span class="portal-hero-label">Blue Archive Fan Site</span>
-        <h1 class="portal-hero-title">KIVOTOS PORTAL</h1>
-        <p class="portal-hero-sub">ブルアカファンサイト キヴォトスポータル</p>
+        <h1 class="portal-hero-title">キヴォトスポータル</h1>
+        <p class="portal-hero-sub">ブルーアーカイブ 非公式ファンサイト</p>
       </div>
 
       <!-- ── イベント速報 ── -->
@@ -754,7 +707,7 @@
       <!-- ── 生徒アーカイブ CTA ── -->
       <div class="archive-cta">
         <div class="archive-cta-text">
-          <h2 class="archive-cta-title">生徒アーカイブ</h2>
+          <h2 class="archive-cta-title">生徒一覧</h2>
           <p class="archive-cta-desc">
             キヴォトス全学園のキャラクターを学園別・ロール別でフィルタリング。<br>
             各生徒のプロフィール・関連グッズリンクをひとまとめに。
@@ -782,10 +735,10 @@
   <footer class="site-footer">
     <div class="footer-links">
       <a href="timeline/index.html">イベント年表</a>
-      <a href="archive/index.html">生徒アーカイブ</a>
+      <a href="archive/index.html">生徒一覧</a>
       <a href="https://bluearchive.jp" target="_blank" rel="noopener">公式サイト</a>
     </div>
-    ブルアカファンサイト KIVOTOS PORTAL — 『ブルーアーカイブ -Blue Archive-』非公式ファンサイト<br>
+    キヴォトスポータル — 『ブルーアーカイブ -Blue Archive-』非公式ファンサイト<br>
     当サイトはYostar / NAT Games のいかなる関与も受けていません。画像・音楽の著作権は各権利者に帰属します。
   </footer>
 
