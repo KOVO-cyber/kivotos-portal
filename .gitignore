@@ -1,6 +1,5 @@
-# ビルドスクリプト（ローカル作業用）
-build_chars.py
-setup_assets.ps1
+# 開発者用メモ（ローカルのみ）
+CONTEXT.md
 
 # OS・エディタ
 .DS_Store
