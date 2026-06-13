@@ -1,0 +1,10 @@
+# ビルドスクリプト（ローカル作業用）
+build_chars.py
+setup_assets.ps1
+
+# OS・エディタ
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.cursor/

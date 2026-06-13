@@ -1,0 +1,900 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ブルアカファンサイト キヴォトスポータル | ブルーアーカイブ 非公式ファンポータル</title>
+  <style>
+    :root {
+      --content-width: min(1200px, calc(100vw - 32px));
+      --text: #2f3f54;
+      --muted: #718099;
+      --accent: #1f3b62;
+      --orange: #F39801;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Segoe UI", "Yu Gothic UI", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── 背景 ─── */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url("assets/bg.jpg");
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      background-attachment: fixed;
+      filter: blur(4px) brightness(.82);
+      transform: scale(1.04);
+      transform-origin: center;
+      pointer-events: none;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at center, rgba(24, 48, 78, .15) 0%, rgba(8, 18, 36, .52) 100%);
+      pointer-events: none;
+    }
+
+    /* ─── ヘッダー ─── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(20, 38, 64, .92);
+      border-bottom: 1px solid rgba(154, 188, 225, .35);
+      backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 16px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .header-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .header-logo-jp {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(207, 225, 245, .75);
+      letter-spacing: .1em;
+    }
+    .header-logo-en {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: .04em;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+    }
+    .header-nav a {
+      padding: 5px 12px;
+      border-radius: 6px;
+      color: rgba(207, 225, 245, .85);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      transition: background .12s, color .12s;
+    }
+    .header-nav a:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+    .header-nav a.active { background: rgba(243, 152, 1, .18); color: var(--orange); }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+    .header-sns a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      color: rgba(207, 225, 245, .7);
+      text-decoration: none;
+      transition: color .12s, background .12s;
+    }
+    .header-sns a:hover { color: #fff; background: rgba(255,255,255,.1); }
+    .header-sns svg { width: 16px; height: 16px; }
+
+    /* ─── メインコンテンツ ─── */
+    main { flex: 1; }
+    .wrap {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    /* ─── ヒーロー / ポータルタイトル ─── */
+    .portal-hero {
+      text-align: center;
+      padding: 32px 16px 24px;
+    }
+    .portal-hero-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      color: rgba(207, 225, 245, .7);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .portal-hero-title {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: .04em;
+      text-shadow: 0 4px 16px rgba(0,0,0,.5), 0 0 12px rgba(243,152,1,.25);
+      line-height: 1.1;
+    }
+    .portal-hero-sub {
+      margin: 6px 0 0;
+      font-size: clamp(13px, 1.6vw, 17px);
+      color: rgba(228, 240, 252, .85);
+      font-weight: 600;
+      letter-spacing: .08em;
+    }
+
+    /* ─── イベント速報バー ─── */
+    .event-strip {
+      border-radius: 12px;
+      background: rgba(20, 38, 64, .78);
+      border: 1px solid rgba(154, 188, 225, .3);
+      backdrop-filter: blur(3px);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .event-strip-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .event-strip-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      color: var(--orange);
+      text-transform: uppercase;
+    }
+    .event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .event-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 10px;
+    }
+    .event-tag {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: .06em;
+      white-space: nowrap;
+    }
+    .event-tag-gacha  { background: rgba(243,152,1,.22); color: #F9B840; border: 1px solid rgba(243,152,1,.4); }
+    .event-tag-event  { background: rgba(94,160,224,.2); color: #7DC4F5; border: 1px solid rgba(94,160,224,.35); }
+    .event-tag-total  { background: rgba(200,80,80,.22); color: #F58080; border: 1px solid rgba(200,80,80,.4); }
+    .event-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(228, 240, 252, .92);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .event-period {
+      font-size: 11px;
+      color: rgba(154, 188, 225, .75);
+      white-space: nowrap;
+    }
+    .event-bar-wrap {
+      grid-column: 1 / -1;
+      height: 4px;
+      background: rgba(255,255,255,.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .event-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: rgba(94, 160, 224, .7);
+    }
+    .event-bar-fill.ending { background: rgba(243, 152, 1, .85); }
+
+    /* ─── 3カラム ダッシュボード ─── */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .dash-card {
+      border-radius: 12px;
+      background: rgba(235, 245, 255, .95);
+      border: 1px solid #c8daea;
+      box-shadow: 0 4px 16px rgba(10, 20, 36, .2);
+      overflow: hidden;
+    }
+    .dash-card-head {
+      padding: 10px 14px;
+      background: rgba(24, 48, 78, .08);
+      border-bottom: 1px solid rgba(154, 188, 225, .4);
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: .1em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dash-card-head svg { width: 14px; height: 14px; opacity: .7; flex-shrink: 0; }
+    .dash-card-body { padding: 12px 14px; }
+
+    /* 公式情報フィード */
+    .feed-list { display: flex; flex-direction: column; gap: 8px; }
+    .feed-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(154,188,225,.25);
+      text-decoration: none;
+      color: inherit;
+      transition: background .12s;
+    }
+    .feed-item:hover { background: #fff; }
+    .feed-src-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .feed-src-icon.yt  { background: #ff0000; }
+    .feed-src-icon.tw  { background: #000; }
+    .feed-src-icon svg { width: 14px; height: 14px; fill: #fff; }
+    .feed-text { flex: 1; min-width: 0; }
+    .feed-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.4;
+    }
+    .feed-date { font-size: 10px; color: var(--muted); margin-top: 3px; }
+    .feed-more {
+      display: block;
+      text-align: center;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #3a7cc0;
+      text-decoration: none;
+      letter-spacing: .06em;
+    }
+    .feed-more:hover { text-decoration: underline; }
+
+    /* ピックアップキャラ */
+    .pickup-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .pickup-card {
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #d9e4ef;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .12s, box-shadow .12s;
+      display: flex;
+      flex-direction: column;
+    }
+    .pickup-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(10,20,36,.18); }
+    .pickup-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+      background: #eef4fb;
+      display: block;
+    }
+    .pickup-img-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(180deg, #dbeafe 0%, #eff6ff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+    .pickup-info {
+      padding: 6px 8px;
+      border-top: 3px solid #2563EB;
+      flex: 1;
+    }
+    .pickup-info.abydos    { border-top-color: #EA580C; }
+    .pickup-info.gehenna   { border-top-color: #B91C1C; }
+    .pickup-info.trinity   { border-top-color: #64748B; }
+    .pickup-info.millennium{ border-top-color: #2563EB; }
+    .pickup-info.shanhai   { border-top-color: #6D28D9; }
+    .pickup-info.hyakki    { border-top-color: #DB2777; }
+    .pickup-info.arius     { border-top-color: #881337; }
+    .pickup-info.srt       { border-top-color: #0D9488; }
+    .pickup-name {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pickup-school {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+    .pickup-see-more {
+      grid-column: 1 / -1;
+      display: block;
+      text-align: center;
+      margin-top: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #3a7cc0;
+      text-decoration: none;
+      letter-spacing: .06em;
+      padding: 6px 0;
+      border-radius: 6px;
+      background: rgba(58,124,192,.06);
+      border: 1px solid rgba(58,124,192,.2);
+    }
+    .pickup-see-more:hover { background: rgba(58,124,192,.12); }
+
+    /* アフィリエイト枠 */
+    .affiliate-list { display: flex; flex-direction: column; gap: 8px; }
+    .affiliate-item {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(154,188,225,.25);
+    }
+    .affiliate-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background: #eef4fb;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .affiliate-thumb-ph {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      background: #dbeafe;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .affiliate-info { flex: 1; min-width: 0; }
+    .affiliate-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 1.35;
+    }
+    .affiliate-pr { font-size: 9px; color: var(--muted); margin-top: 2px; }
+    .affiliate-link {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 5px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: .04em;
+      flex-shrink: 0;
+    }
+    .affiliate-link:hover { opacity: .88; }
+
+    /* ─── キャラアーカイブ CTA ─── */
+    .archive-cta {
+      border-radius: 14px;
+      background: rgba(20, 38, 64, .78);
+      border: 1px solid rgba(154, 188, 225, .3);
+      backdrop-filter: blur(3px);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 20px;
+    }
+    .archive-cta-text { flex: 1; }
+    .archive-cta-title {
+      margin: 0 0 6px;
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: .04em;
+    }
+    .archive-cta-desc {
+      margin: 0;
+      font-size: 13px;
+      color: rgba(207, 225, 245, .8);
+      line-height: 1.55;
+    }
+    .archive-cta-school-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+    .school-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      letter-spacing: .06em;
+    }
+    .archive-cta-btn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      background: rgba(235, 245, 255, .95);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      border: 1px solid #9abbe0;
+      box-shadow: 0 4px 12px rgba(10,20,36,.28);
+      transition: transform .12s, box-shadow .12s, background .12s;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .archive-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(10,20,36,.38);
+      background: #fff;
+    }
+    .archive-cta-btn svg { width: 18px; height: 18px; }
+
+    /* ─── フッター ─── */
+    footer.site-footer {
+      flex: 0 0 auto;
+      padding: 14px 16px 18px;
+      text-align: center;
+      color: rgba(207, 225, 245, .7);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
+      border-top: 1px solid rgba(154, 188, 225, .15);
+      background: rgba(8, 18, 36, .3);
+    }
+    .footer-links { margin-bottom: 6px; }
+    .footer-links a {
+      color: rgba(154, 188, 225, .75);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    .footer-links a:hover { color: #cfe1f5; }
+
+    /* ─── レスポンシブ ─── */
+    @media (max-width: 860px) {
+      .dashboard { grid-template-columns: 1fr; }
+      .pickup-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .archive-cta { flex-direction: column; text-align: center; }
+      .archive-cta-school-badges { justify-content: center; }
+      .header-nav { display: none; }
+      .pickup-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 400px) {
+      .pickup-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── ヘッダー ── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-logo" href="index.html">
+        <span class="header-logo-jp">ブルアカファンサイト</span>
+        <span class="header-logo-en">KIVOTOS PORTAL</span>
+      </a>
+      <nav class="header-nav" aria-label="グローバルナビ">
+        <a href="index.html" class="active">ホーム</a>
+        <a href="archive/index.html">生徒アーカイブ</a>
+        <a href="timeline/index.html">イベント年表</a>
+      </nav>
+      <div class="header-right">
+        <div class="header-sns">
+          <!-- X (Twitter) -->
+          <a href="https://x.com/Blue_ArchiveJP" target="_blank" rel="noopener" title="公式X（Twitter）">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.734-8.849L1.523 2.25H8.08l4.259 5.64L18.244 2.25zm-1.16 17.52h1.833L7.084 4.126H5.117L17.084 19.77z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@bluearchive_yustar" target="_blank" rel="noopener" title="公式YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+
+      <!-- ── ポータルタイトル ── -->
+      <div class="portal-hero">
+        <span class="portal-hero-label">Blue Archive Fan Site</span>
+        <h1 class="portal-hero-title">KIVOTOS PORTAL</h1>
+        <p class="portal-hero-sub">ブルアカファンサイト キヴォトスポータル</p>
+      </div>
+
+      <!-- ── イベント速報 ── -->
+      <div class="event-strip">
+        <div class="event-strip-head">
+          <span class="event-strip-label">イベント速報</span>
+        </div>
+        <!-- data/events.json で管理→JSで動的生成する想定。以下はサンプル -->
+        <div class="event-list" id="event-list">
+          <div class="event-item">
+            <span class="event-tag event-tag-gacha">ガチャ</span>
+            <span class="event-name">ピックアップ：（最新ガチャ名）</span>
+            <span class="event-period">〜 6/20</span>
+          </div>
+          <div class="event-bar-wrap"><div class="event-bar-fill ending" style="width:30%"></div></div>
+          <div class="event-item">
+            <span class="event-tag event-tag-event">イベント</span>
+            <span class="event-name">（最新イベント名）</span>
+            <span class="event-period">〜 6/25</span>
+          </div>
+          <div class="event-bar-wrap"><div class="event-bar-fill" style="width:62%"></div></div>
+          <div class="event-item">
+            <span class="event-tag event-tag-total">総力戦</span>
+            <span class="event-name">総力戦（ボス名）</span>
+            <span class="event-period">〜 6/19</span>
+          </div>
+          <div class="event-bar-wrap"><div class="event-bar-fill ending" style="width:18%"></div></div>
+        </div>
+      </div>
+
+      <!-- ── ダッシュボード 3カラム ── -->
+      <div class="dashboard">
+
+        <!-- 公式情報フィード -->
+        <div class="dash-card">
+          <div class="dash-card-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+            公式情報フィード
+          </div>
+          <div class="dash-card-body">
+            <!-- data/official-feed.json で管理→JS読み込み想定 -->
+            <div class="feed-list" id="feed-list">
+              <a class="feed-item" href="https://x.com/Blue_ArchiveJP" target="_blank" rel="noopener">
+                <div class="feed-src-icon tw">
+                  <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.741l7.734-8.849L1.523 2.25H8.08l4.259 5.64L18.244 2.25z"/></svg>
+                </div>
+                <div class="feed-text">
+                  <div class="feed-title">公式Xで最新情報をチェック</div>
+                  <div class="feed-date">@Blue_ArchiveJP</div>
+                </div>
+              </a>
+              <a class="feed-item" href="https://www.youtube.com/@bluearchive_yustar" target="_blank" rel="noopener">
+                <div class="feed-src-icon yt">
+                  <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </div>
+                <div class="feed-text">
+                  <div class="feed-title">公式YouTubeで最新PV・生放送を視聴</div>
+                  <div class="feed-date">bluearchive_yustar</div>
+                </div>
+              </a>
+              <a class="feed-item" href="https://bluearchive.jp" target="_blank" rel="noopener">
+                <div class="feed-src-icon" style="background:#1f3b62">
+                  <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <div class="feed-text">
+                  <div class="feed-title">ブルーアーカイブ 公式サイト</div>
+                  <div class="feed-date">bluearchive.jp</div>
+                </div>
+              </a>
+            </div>
+            <a class="feed-more" href="https://x.com/Blue_ArchiveJP" target="_blank" rel="noopener">公式Xをもっと見る →</a>
+          </div>
+        </div>
+
+        <!-- ピックアップキャラ -->
+        <div class="dash-card">
+          <div class="dash-card-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            ピックアップキャラ
+          </div>
+          <div class="dash-card-body">
+            <!-- キャラカードサンプル。archive/index.html へ誘導 -->
+            <div class="pickup-grid">
+              <a class="pickup-card" href="archive/index.html">
+                <div class="pickup-img-placeholder">★</div>
+                <div class="pickup-info millennium">
+                  <div class="pickup-name">キャラ名</div>
+                  <div class="pickup-school">ミレニアム</div>
+                </div>
+              </a>
+              <a class="pickup-card" href="archive/index.html">
+                <div class="pickup-img-placeholder">★</div>
+                <div class="pickup-info gehenna">
+                  <div class="pickup-name">キャラ名</div>
+                  <div class="pickup-school">ゲヘナ</div>
+                </div>
+              </a>
+              <a class="pickup-card" href="archive/index.html">
+                <div class="pickup-img-placeholder">★</div>
+                <div class="pickup-info abydos">
+                  <div class="pickup-name">キャラ名</div>
+                  <div class="pickup-school">アビドス</div>
+                </div>
+              </a>
+              <a class="pickup-see-more" href="archive/index.html">全キャラを見る →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- アフィリエイト枠 -->
+        <div class="dash-card">
+          <div class="dash-card-head">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            今週の注目グッズ
+          </div>
+          <div class="dash-card-body">
+            <div class="affiliate-list" id="affiliate-list">
+              <div class="affiliate-item">
+                <div class="affiliate-thumb-ph">🎌</div>
+                <div class="affiliate-info">
+                  <div class="affiliate-name">（グッズ名・フィギュア等）</div>
+                  <div class="affiliate-pr">PR</div>
+                </div>
+                <a class="affiliate-link" href="#" target="_blank" rel="noopener sponsored">Amazon</a>
+              </div>
+              <div class="affiliate-item">
+                <div class="affiliate-thumb-ph">📀</div>
+                <div class="affiliate-info">
+                  <div class="affiliate-name">（グッズ名・CD等）</div>
+                  <div class="affiliate-pr">PR</div>
+                </div>
+                <a class="affiliate-link" href="#" target="_blank" rel="noopener sponsored">あみあみ</a>
+              </div>
+              <div class="affiliate-item">
+                <div class="affiliate-thumb-ph">📚</div>
+                <div class="affiliate-info">
+                  <div class="affiliate-name">（書籍・コミカライズ等）</div>
+                  <div class="affiliate-pr">PR</div>
+                </div>
+                <a class="affiliate-link" href="#" target="_blank" rel="noopener sponsored">Amazon</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.dashboard -->
+
+      <!-- ── Google AdSense 横長バナー ── -->
+      <!--
+        AdSense 審査通過後に下記のコメントを外してください。
+        client="ca-pub-XXXXXXXXXXXXXXXX" と slot="XXXXXXXXXX" を自分のIDに書き換える。
+      -->
+      <!--
+      <div style="margin-bottom:20px;text-align:center">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="XXXXXXXXXX"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      -->
+
+      <!-- ── 生徒アーカイブ CTA ── -->
+      <div class="archive-cta">
+        <div class="archive-cta-text">
+          <h2 class="archive-cta-title">生徒アーカイブ</h2>
+          <p class="archive-cta-desc">
+            キヴォトス全学園のキャラクターを学園別・ロール別でフィルタリング。<br>
+            各生徒のプロフィール・関連グッズリンクをひとまとめに。
+          </p>
+          <div class="archive-cta-school-badges">
+            <span class="school-badge" style="background:rgba(234,88,12,.2);color:#F97316;border:1px solid rgba(234,88,12,.4)">アビドス</span>
+            <span class="school-badge" style="background:rgba(185,28,28,.2);color:#F87171;border:1px solid rgba(185,28,28,.4)">ゲヘナ</span>
+            <span class="school-badge" style="background:rgba(100,116,139,.2);color:#CBD5E1;border:1px solid rgba(100,116,139,.4)">トリニティ</span>
+            <span class="school-badge" style="background:rgba(37,99,235,.2);color:#93C5FD;border:1px solid rgba(37,99,235,.4)">ミレニアム</span>
+            <span class="school-badge" style="background:rgba(109,40,217,.2);color:#C4B5FD;border:1px solid rgba(109,40,217,.4)">山海経</span>
+            <span class="school-badge" style="background:rgba(219,39,119,.2);color:#F9A8D4;border:1px solid rgba(219,39,119,.4)">百鬼夜行</span>
+            <span class="school-badge" style="background:rgba(136,19,55,.2);color:#FDA4AF;border:1px solid rgba(136,19,55,.4)">アリウス</span>
+            <span class="school-badge" style="background:rgba(13,148,136,.2);color:#5EEAD4;border:1px solid rgba(13,148,136,.4)">SRT</span>
+          </div>
+        </div>
+        <a class="archive-cta-btn" href="archive/index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          生徒一覧を見る
+        </a>
+      </div>
+
+    </div><!-- /.wrap -->
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="timeline/index.html">イベント年表</a>
+      <a href="archive/index.html">生徒アーカイブ</a>
+      <a href="https://bluearchive.jp" target="_blank" rel="noopener">公式サイト</a>
+    </div>
+    ブルアカファンサイト KIVOTOS PORTAL — 『ブルーアーカイブ -Blue Archive-』非公式ファンサイト<br>
+    当サイトはYostar / NAT Games のいかなる関与も受けていません。画像・音楽の著作権は各権利者に帰属します。
+  </footer>
+
+  <script>
+    // ─── イベント速報（events.json 動的読み込み） ───
+    const EVENT_TAG_CLASS = { gacha: 'event-tag-gacha', event: 'event-tag-event', total: 'event-tag-total' };
+    const EVENT_TAG_LABEL = { gacha: 'ガチャ', event: 'イベント', total: '総力戦' };
+
+    async function loadEvents() {
+      try {
+        const res = await fetch('assets/data/events.json');
+        const data = await res.json();
+        const now = Date.now();
+        const list = document.getElementById('event-list');
+        list.innerHTML = data.map(ev => {
+          const start = new Date(ev.startDate).getTime();
+          const end   = new Date(ev.endDate).getTime();
+          const pct   = Math.max(0, Math.min(100, ((now - start) / (end - start)) * 100)) | 0;
+          const ending = pct >= 70;
+          const tc    = EVENT_TAG_CLASS[ev.type] || 'event-tag-event';
+          const tl    = EVENT_TAG_LABEL[ev.type] || ev.type;
+          const endStr = new Date(ev.endDate).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric' });
+          const nameEl = ev.url
+            ? `<a class="event-name" href="${ev.url}" target="_blank" rel="noopener" style="color:inherit">${ev.name}</a>`
+            : `<span class="event-name">${ev.name}</span>`;
+          return `
+            <div class="event-item">
+              <span class="event-tag ${tc}">${tl}</span>
+              ${nameEl}
+              <span class="event-period">〜 ${endStr}</span>
+            </div>
+            <div class="event-bar-wrap">
+              <div class="event-bar-fill${ending ? ' ending' : ''}" style="width:${pct}%"></div>
+            </div>`;
+        }).join('');
+      } catch {
+        // events.json が未更新でもホームは壊れない
+      }
+    }
+
+    // ─── アフィリエイト枠（affiliates.json 動的読み込み） ───
+    const AFFILIATE_ICON = { amazon: '📦', amiami: '🎌', other: '🛒' };
+    const AFFILIATE_LABEL = { amazon: 'Amazon', amiami: 'あみあみ', other: 'リンク' };
+
+    async function loadAffiliates() {
+      try {
+        const res = await fetch('assets/data/affiliates.json');
+        const data = await res.json();
+        const list = document.getElementById('affiliate-list');
+        list.innerHTML = data.map(item => {
+          const icon  = AFFILIATE_ICON[item.type]  || AFFILIATE_ICON.other;
+          const label = AFFILIATE_LABEL[item.type] || 'リンク';
+          const thumb = item.thumb
+            ? `<img class="affiliate-thumb" src="${item.thumb}" alt="" loading="lazy">`
+            : `<div class="affiliate-thumb-ph">${icon}</div>`;
+          const href  = item.url || '#';
+          return `
+            <div class="affiliate-item">
+              ${thumb}
+              <div class="affiliate-info">
+                <div class="affiliate-name">${item.name}</div>
+                <div class="affiliate-pr">PR</div>
+              </div>
+              <a class="affiliate-link" href="${href}" target="_blank" rel="noopener sponsored">${label}</a>
+            </div>`;
+        }).join('');
+      } catch {
+        // affiliates.json が未更新でも壊れない
+      }
+    }
+
+    // ─── ピックアップキャラ（characters.json 先頭から3件） ───
+    const SCHOOL_CLASS_HOME = {
+      'アビドス': 'abydos', 'ゲヘナ': 'gehenna', 'トリニティ': 'trinity',
+      'ミレニアム': 'millennium', '山海経': 'shanhai', '百鬼夜行': 'hyakki',
+      'アリウス': 'arius', 'SRT': 'srt',
+    };
+
+    async function loadPickup() {
+      try {
+        const res  = await fetch('assets/data/characters.json');
+        const data = await res.json();
+        // ランダム3件
+        const shuffled = [...data].sort(() => Math.random() - 0.5).slice(0, 3);
+        const grid = document.querySelector('.pickup-grid');
+        const seeMore = grid.querySelector('.pickup-see-more');
+        const cards = shuffled.map(c => {
+          const sc  = SCHOOL_CLASS_HOME[c.school] || '';
+          const img = c.image
+            ? `<img class="pickup-img" src="assets/icons/${c.image}" alt="${c.name}" loading="lazy" onerror="this.style.display='none'">`
+            : `<div class="pickup-img-placeholder">★</div>`;
+          return `
+            <a class="pickup-card" href="archive/index.html">
+              <div style="position:relative">${img}<div class="pickup-img-placeholder" style="${c.image ? 'display:none' : ''}">★</div></div>
+              <div class="pickup-info ${sc}">
+                <div class="pickup-name">${c.name}</div>
+                <div class="pickup-school">${c.school}</div>
+              </div>
+            </a>`;
+        }).join('');
+        grid.innerHTML = cards + seeMore.outerHTML;
+      } catch {
+        // 失敗時はプレースホルダーのまま
+      }
+    }
+
+    loadEvents();
+    loadAffiliates();
+    loadPickup();
+  </script>
+</body>
+</html>
